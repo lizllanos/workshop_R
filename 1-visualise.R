@@ -3,6 +3,7 @@ library(tidyr)
 library(dplyr)
 library(ggplot2)
 
+setwd("D:/_Scripts/workshop_R")
 # Minor fixes for the included data
 weather <- read_csv("weather.csv", col_types = list(
   date = col_datetime("%Y-%m-%d %H:%M:%S"),
@@ -17,7 +18,6 @@ weather <- read_csv("weather.csv", col_types = list(
 weather
 str(weather)
 View(weather)
-
 
 # Introduction to data frames --------------------------------------------------
 
@@ -37,10 +37,19 @@ qplot(temp, humid, data = daily, shape = origin)
 qplot(temp, humid, data = daily, colour = origin)
 qplot(temp, humid, data = daily, colour = dewp)+scale_color_continuous(low="yellow",high = "purple")
 
-# qplot(temp, pressure, data = daily)
-# qplot(pressure, wind_speed, data = daily)
-# qplot(temp, wind_speed, data = daily)
+p <- ggplot(daily,aes(temp, humid)) + geom_point()
+p <- p + ylab("Temperatura") + xlab("Humedad Relativa")
+p + theme_bw()
+p + theme_classic()
+p + theme_dark()
 
+p <- p + ggtitle("Gráfico de dispersión") + theme(plot.title = element_text(lineheight=.8))
+p <- p + theme(plot.title = element_text(lineheight=.8, face="bold"))
+p <- p + theme(panel.background = element_rect(fill = "white", colour = "grey50"))
+
+print(p)
+
+ggsave("plot.png", width = 5, height = 5)
 # Discrete data
 qplot(wind_dir, wind_speed, data = daily)
 qplot(wind_dir, wind_speed, data = daily, geom = "jitter")
