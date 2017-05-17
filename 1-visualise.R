@@ -37,19 +37,6 @@ qplot(temp, humid, data = daily, shape = origin)
 qplot(temp, humid, data = daily, colour = origin)
 qplot(temp, humid, data = daily, colour = dewp)+scale_color_continuous(low="yellow",high = "purple")
 
-p <- ggplot(daily,aes(temp, humid)) + geom_point()
-p <- p + ylab("Temperatura") + xlab("Humedad Relativa")
-p + theme_bw()
-p + theme_classic()
-p + theme_dark()
-
-p <- p + ggtitle("Gráfico de dispersión") + theme(plot.title = element_text(lineheight=.8))
-p <- p + theme(plot.title = element_text(lineheight=.8, face="bold"))
-p <- p + theme(panel.background = element_rect(fill = "white", colour = "grey50"))
-
-print(p)
-
-ggsave("plot.png", width = 5, height = 5)
 # Discrete data
 qplot(wind_dir, wind_speed, data = daily)
 qplot(wind_dir, wind_speed, data = daily, geom = "jitter")
@@ -70,6 +57,22 @@ qplot(date, temp_diff, data = daily, colour = origin, geom = "line")
 qplot(hour, temp, data = jfk, geom = "line", group = interaction(month, day))
 qplot(hour, temp, data = jfk, geom = "line", group = interaction(day, origin)) +
   facet_wrap(~month)
+
+#personalize your plot
+p <- ggplot(daily,aes(temp, humid)) + geom_point()
+p <- p + ylab("Temperatura") + xlab("Humedad Relativa")
+p + theme_bw()
+p + theme_classic()
+p + theme_dark()
+
+p <- p + ggtitle("Gráfico de dispersión") + theme(plot.title = element_text(lineheight=.8))
+p <- p + theme(plot.title = element_text(lineheight=.8, face="bold"))
+p <- p + theme(panel.background = element_rect(fill = "white", colour = "grey50"))
+
+print(p)
+
+ggsave("plot.png", width = 5, height = 5)
+
 
 # Histograms -------------------------------------------------------------------
 
